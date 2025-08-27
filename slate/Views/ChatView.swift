@@ -41,7 +41,7 @@ struct ChatView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            // Header with model picker and controls
+            // Premium Liquid Glass Header
             ChatHeaderView(
                 conversation: conversation,
                 selectedModel: selectedModel,
@@ -51,28 +51,33 @@ struct ChatView: View {
             )
             .environmentObject(apiManager)
             
-            // Messages
+            // Enhanced Messages with Premium Spacing
             ScrollViewReader { proxy in
                 ScrollView {
-                    LazyVStack(spacing: 16) {
+                    LazyVStack(spacing: 20) {
                         ForEach(filteredMessages) { message in
                             MessageBubble(message: message)
                                 .id(message.id)
+                                .transition(.asymmetric(
+                                    insertion: .scale(scale: 0.8).combined(with: .opacity),
+                                    removal: .scale(scale: 0.8).combined(with: .opacity)
+                                ))
                         }
                     }
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 8)
+                    .padding(.horizontal, 24)
+                    .padding(.vertical, 16)
                 }
+                .scrollIndicators(.hidden)
                 .onChange(of: conversation.messages.count) { _, _ in
                     if let lastMessage = conversation.messages.last {
-                        withAnimation(.easeOut(duration: 0.3)) {
+                        withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
                             proxy.scrollTo(lastMessage.id, anchor: .bottom)
                         }
                     }
                 }
             }
             
-            // Input area
+            // Premium Floating Liquid Glass Input
             ChatInputView(
                 messageText: $messageText,
                 selectedFiles: $selectedFiles,
@@ -83,6 +88,16 @@ struct ChatView: View {
                 onSend: sendMessage
             )
         }
+        .background(
+            LinearGradient(
+                colors: [
+                    Color(.systemBackground),
+                    Color(.systemBackground).opacity(0.95)
+                ],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+        )
         .navigationBarHidden(true)
         .sheet(isPresented: $showingModelPicker) {
             ModelPickerView(conversation: conversation)
