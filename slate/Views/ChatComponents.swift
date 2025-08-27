@@ -32,7 +32,7 @@ struct ChatHeaderView: View {
                     }
                     .padding(.horizontal, 20)
                     .padding(.vertical, 12)
-                    .background(.ultraThinMaterial, in: .rect(cornerRadius: 20))
+                    .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 20))
                     .overlay {
                         RoundedRectangle(cornerRadius: 20)
                             .strokeBorder(.white.opacity(0.3), lineWidth: 1)
@@ -55,11 +55,14 @@ struct ChatHeaderView: View {
                             .font(.system(.title3, weight: .semibold))
                             .foregroundStyle(conversation.thinkHarderEnabled ? .white : .primary)
                             .frame(width: 44, height: 44)
-                            .background(
-                                conversation.thinkHarderEnabled ?
-                                    .blue.gradient :
-                                    .ultraThinMaterial,
-                                in: .rect(cornerRadius: 22)
+                            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 22))
+                            .overlay(
+                                Group {
+                                    if conversation.thinkHarderEnabled {
+                                        RoundedRectangle(cornerRadius: 22)
+                                            .fill(.blue.gradient)
+                                    }
+                                }
                             )
                             .overlay {
                                 RoundedRectangle(cornerRadius: 22)
@@ -90,11 +93,14 @@ struct ChatHeaderView: View {
                             .font(.system(.title3, weight: .semibold))
                             .foregroundStyle(isSearching ? .white : .primary)
                             .frame(width: 44, height: 44)
-                            .background(
-                                isSearching ?
-                                    .blue.gradient :
-                                    .ultraThinMaterial,
-                                in: .rect(cornerRadius: 22)
+                            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 22))
+                            .overlay(
+                                Group {
+                                    if isSearching {
+                                        RoundedRectangle(cornerRadius: 22)
+                                            .fill(.blue.gradient)
+                                    }
+                                }
                             )
                             .overlay {
                                 RoundedRectangle(cornerRadius: 22)
@@ -132,7 +138,7 @@ struct ChatHeaderView: View {
                     }
                     .padding(.horizontal, 20)
                     .padding(.vertical, 16)
-                    .background(.ultraThinMaterial, in: .rect(cornerRadius: 20))
+                    .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 20))
                     .overlay {
                         RoundedRectangle(cornerRadius: 20)
                             .strokeBorder(.white.opacity(0.3), lineWidth: 1)
@@ -177,7 +183,7 @@ struct MessageBubble: View {
                 
                 VStack(alignment: .trailing, spacing: 12) {
                     messageContent
-                        .background(.blue.gradient, in: .rect(cornerRadius: 24))
+                        .background(.blue.gradient, in: RoundedRectangle(cornerRadius: 24))
                         .foregroundStyle(.white)
                         .shadow(color: .blue.opacity(0.4), radius: 12, x: 0, y: 6)
                         .scaleEffect(isAppearing ? 1.0 : 0.8)
@@ -191,7 +197,7 @@ struct MessageBubble: View {
             } else {
                 VStack(alignment: .leading, spacing: 12) {
                     messageContent
-                        .background(.ultraThinMaterial, in: .rect(cornerRadius: 24))
+                        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 24))
                         .overlay {
                             RoundedRectangle(cornerRadius: 24)
                                 .strokeBorder(.white.opacity(0.3), lineWidth: 1)
@@ -216,7 +222,7 @@ struct MessageBubble: View {
                             .foregroundStyle(.blue)
                             .padding(.horizontal, 10)
                             .padding(.vertical, 4)
-                            .background(.blue.opacity(0.15), in: .rect(cornerRadius: 12))
+                            .background(.blue.opacity(0.15), in: RoundedRectangle(cornerRadius: 12))
                             .overlay {
                                 RoundedRectangle(cornerRadius: 12)
                                     .strokeBorder(.blue.opacity(0.3), lineWidth: 1)
@@ -264,7 +270,7 @@ struct MessageBubble: View {
                     configuration.label
                         .padding(.horizontal, 20)
                         .padding(.vertical, 16)
-                        .background(.black.opacity(0.08), in: .rect(cornerRadius: 16))
+                        .background(.black.opacity(0.08), in: RoundedRectangle(cornerRadius: 16))
                         .overlay {
                             RoundedRectangle(cornerRadius: 16)
                                 .strokeBorder(.white.opacity(0.2), lineWidth: 1)
@@ -300,7 +306,7 @@ struct PremiumLiquidThinkingIndicator: View {
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 10)
-        .background(.blue.opacity(0.15), in: .rect(cornerRadius: 20))
+        .background(.blue.opacity(0.15), in: RoundedRectangle(cornerRadius: 20))
         .overlay {
             RoundedRectangle(cornerRadius: 20)
                 .strokeBorder(.blue.opacity(0.3), lineWidth: 1)
@@ -359,7 +365,7 @@ struct ChatInputView: View {
                         ForEach(Array(selectedImages.enumerated()), id: \.offset) { index, image in
                             PremiumLiquidImagePreview(image: image) {
                                 withAnimation(.spring(response: 0.5, dampingFraction: 0.7)) {
-                                    selectedImages.remove(at: index)
+                                    selectedImages.remove(at: selectedImages.index(selectedImages.startIndex, offsetBy: index))
                                 }
                             }
                         }
@@ -398,7 +404,7 @@ struct ChatInputView: View {
                         .font(.system(.title3, weight: .bold))
                         .foregroundStyle(.blue)
                         .frame(width: 48, height: 48)
-                        .background(.ultraThinMaterial, in: .rect(cornerRadius: 24))
+                        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 24))
                         .overlay {
                             RoundedRectangle(cornerRadius: 24)
                                 .strokeBorder(.white.opacity(0.3), lineWidth: 1)
@@ -437,14 +443,14 @@ struct ChatInputView: View {
                             }
                         }
                         .frame(width: 40, height: 40)
-                        .background(.blue.gradient, in: .rect(cornerRadius: 20))
+                        .background(.blue.gradient, in: RoundedRectangle(cornerRadius: 20))
                         .shadow(color: .blue.opacity(0.5), radius: 10, x: 0, y: 5)
                         .scaleEffect(messageText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? 0.8 : 1.0)
                         .animation(.spring(response: 0.3, dampingFraction: 0.7), value: messageText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                     }
                     .disabled(messageText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || isSending)
                 }
-                .background(.ultraThinMaterial, in: .rect(cornerRadius: 28))
+                .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 28))
                 .overlay {
                     RoundedRectangle(cornerRadius: 28)
                         .strokeBorder(.white.opacity(0.3), lineWidth: 1)
@@ -499,7 +505,7 @@ struct PremiumLiquidFilePreview: View {
         }
         .padding(.horizontal, 20)
         .padding(.vertical, 16)
-        .background(.ultraThinMaterial, in: .rect(cornerRadius: 20))
+        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 20))
         .overlay {
             RoundedRectangle(cornerRadius: 20)
                 .strokeBorder(.white.opacity(0.3), lineWidth: 1)
@@ -518,7 +524,7 @@ struct PremiumLiquidImagePreview: View {
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 90, height: 90)
-                .clipShape(.rect(cornerRadius: 20))
+                .clipShape(RoundedRectangle(cornerRadius: 20))
                 .overlay {
                     RoundedRectangle(cornerRadius: 20)
                         .strokeBorder(.white.opacity(0.3), lineWidth: 1)
