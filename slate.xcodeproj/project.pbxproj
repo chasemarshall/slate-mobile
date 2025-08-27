@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		ABC134C22E5EFD9400E918B9 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = ABC134C12E5EFD9400E918B9 /* MarkdownUI */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		ABC1349E2E5EFBDF00E918B9 /* slate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = slate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABC134C22E5EFD9400E918B9 /* MarkdownUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,7 @@
 			);
 			name = slate;
 			packageProductDependencies = (
+				ABC134C12E5EFD9400E918B9 /* MarkdownUI */,
 			);
 			productName = slate;
 			productReference = ABC1349E2E5EFBDF00E918B9 /* slate.app */;
@@ -107,6 +113,9 @@
 			);
 			mainGroup = ABC134952E5EFBDF00E918B9;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				ABC134C02E5EFD9400E918B9 /* XCRemoteSwiftPackageReference "MarkdownUI" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = ABC1349F2E5EFBDF00E918B9 /* Products */;
 			projectDirPath = "";
@@ -349,6 +358,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		ABC134C02E5EFD9400E918B9 /* XCRemoteSwiftPackageReference "MarkdownUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/gonzalezreal/MarkdownUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.4.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		ABC134C12E5EFD9400E918B9 /* MarkdownUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ABC134C02E5EFD9400E918B9 /* XCRemoteSwiftPackageReference "MarkdownUI" */;
+			productName = MarkdownUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = ABC134962E5EFBDF00E918B9 /* Project object */;
 }

@@ -6,5 +6,8 @@
 	<array>
 		<string>remote-notification</string>
 	</array>
+	<key>CFBundleIdentifier</key>
+	<string>&lt;key&gt;NSPhotoLibraryUsageDescription&lt;/key&gt;
+&lt;string&gt;This app needs access to your photo library to attach images to messages.&lt;/string&gt;</string>
 </dict>
 </plist>
